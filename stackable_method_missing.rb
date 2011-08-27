@@ -18,8 +18,8 @@ module StackableMethodMissing
   # Redefined, so it's important to list StackableMethodMissing as the final include.
   def method_missing(*args)
     self._stack.each do |method_or_block|
-      self.send method_or_block if method_or_block.is_a?(String) or method_or_block.is_a?(Symbol)
-      method_or_block.call if method_or_block.is_a?(Proc)
+      self.send(method_or_block, args) if method_or_block.is_a?(String) or method_or_block.is_a?(Symbol)
+      method_or_block.call(args) if method_or_block.is_a?(Proc)
     end
   end
   
